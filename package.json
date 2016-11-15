@@ -1,6 +1,6 @@
 {
   "name": "shen-rate-limit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Basic IP rate-limiting middleware for meu.guru",
   "main": "lib/index.js",
   "scripts": {
