@@ -16,7 +16,7 @@
 * [Features](#features)
 * [Configuration](#configuration)
 * [Documentation](#docs)
-* [Contact](#contributors)
+* [Contributors](#contributors)
 * [License](#license)
 
 ## <a name="about"></a>About
