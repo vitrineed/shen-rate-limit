@@ -2,7 +2,7 @@
   "name": "shen-rate-limit",
   "version": "1.0.0",
   "description": "Basic IP rate-limiting middleware for meu.guru",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "grunt"
   },
@@ -40,6 +40,9 @@
     "supertest": "^2.0.0",
     "time-grunt": "^1.3.0"
   },
+  "files":[
+    "lib/"
+  ],
   "maintainers": [
     {
       "name": "nfriedly",
