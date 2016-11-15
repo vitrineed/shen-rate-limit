@@ -1,0 +1,6 @@
+/Gruntfile.js
+test/
+/.travis.yml
+/.npmignore
+/.jshintrc
+node_modules/
