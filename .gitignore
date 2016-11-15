@@ -4,3 +4,4 @@ test/
 /.npmignore
 /.jshintrc
 node_modules/
+/npm-debug.log
