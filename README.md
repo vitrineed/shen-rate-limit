@@ -71,7 +71,7 @@ With Shen you can manage your KeyChan, adding, removing and cleaning all keys.
 
 
 ### IP Whitelist
-Shen includes a whitelist system. You can configure which IP won't need to provide an API KEY, and won't consume the rate-limit.
+Shen includes a whitelist system. You can configure which IP won't need to provide an API KEY, and won't consume the rate-limit(This is an array).
 
 ## <a name="docs"></a>Documentation
 > Coming soon :D
@@ -85,7 +85,7 @@ Shen includes a whitelist system. You can configure which IP won't need to provi
 * **message**: Error message returned when `max` is exceeded. Defaults to `'Too many requests, please try again later.'`
 * **statusCode**: HTTP status code returned when `max` is exceeded. Defaults to `429`.
 * **headers**: Enable header to show request limit and current usage
-* **allowedIp**: Whitelisted ip, won't consume Rate limit and won't need an API KEY.
+* **allowedIp**: Whitelisted ip (an array), won't consume Rate limit and won't need an API KEY.
 * **keyGet**: Function used to get user key. By default passed by header X-RateLimit-ApiKey. Defaults:
 ```js
 function (req /*, res, next*/) {
