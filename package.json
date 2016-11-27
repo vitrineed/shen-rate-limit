@@ -1,6 +1,6 @@
 {
   "name": "shen-rate-limit",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Simple IP/API Key rate-limiting middleware.",
   "main": "lib/index.js",
   "scripts": {
