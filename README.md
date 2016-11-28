@@ -73,8 +73,71 @@ With Shen you can manage your KeyChan, adding, removing and cleaning all keys.
 ### IP Whitelist
 Shen includes a whitelist system. You can configure which IP won't need to provide an API KEY, and won't consume the rate-limit(This is an array).
 
+### Json-based database
+Shen includes an json-based. Shen reads a json file, an add all created keys to keychan. Every time a key is added, removed or cleaned, Shen overwritten the json file.
+
 ## <a name="docs"></a>Documentation
-> Coming soon :D
+### Usage
+
+For an API-only server where the rate-limiter should be applied to all requests:
+```js
+    var RateLimit = require('shen-rate-limit');
+
+    app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc)
+
+    var limiter = new RateLimit({
+      windowMs: 15*60*1000, // 15 minutes
+      max: 100, // limit each IP to 100 requests per windowMs
+      delayMs: 0 // disable delaying - full speed until the max limit is reached
+    });
+
+    //  apply to all requests
+    app.use(limiter);
+```
+
+For a "regular" web server (e.g. anything that uses `express.static()`), where the rate-limiter should only apply to certain requests:
+
+```js
+    var RateLimit = require('shen-rate-limit');
+
+    app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc)
+
+    var apiLimiter = new RateLimit({
+      windowMs: 15*60*1000, // 15 minutes
+      max: 100,
+      delayMs: 0 // disabled
+    });
+
+    // only apply to requests that begin with /api/
+    app.use('/api/', apiLimiter);
+
+```
+
+Create multiple instances to apply different rules to different routes:
+
+```js
+    var RateLimit = require('shen-rate-limit');
+
+    app.enable('trust proxy'); // only if you're behind a reverse proxy (Heroku, Bluemix, AWS if you use an ELB, custom Nginx setup, etc)
+
+    var apiLimiter = new RateLimit({
+      windowMs: 15*60*1000, // 15 minutes
+      max: 100,
+      delayMs: 0 // disabled
+    });
+    app.use('/api/', apiLimiter);
+
+    var createAccountLimiter = new RateLimit({
+      windowMs: 60*60*1000, // 1 hour window
+      delayAfter: 1, // begin slowing down responses after the first request
+      delayMs: 3*1000, // slow down subsequent responses by 3 seconds per request
+      max: 5, // start blocking after 5 requests
+      message: "Too many accounts created from this IP, please try again after an hour"
+    });
+    app.post('/create-account', createAccountLimiter, function(req, res) {
+    //...
+    });
+```
 
 ## <a name="configuration"></a>Configuration
 
@@ -167,7 +230,7 @@ function SomeStore() {
 ```
 
   Avaliable data stores are:
-   * MemoryStore: (default)Simple in-memory option. Does not share state when app has multiple processes or servers.
+   * MemoryStore: (default)Basic json-based memory, every time servers up, load a json file. Every time a key is add/clean/removed, an json file is overwritten.
    * [rate-limit-redis]: [Redis](http://redis.io/)-backed store, more suitable for large or demanding deployments.
 
 The `delayAfter` and `delayMs` options were written for human-facing pages such as login and password reset forms.
