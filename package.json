@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meu-guru/shen-rate-limit.git"
+    "url": "git+https://github.com/vitrineed/shen-rate-limit.git"
   },
   "keywords": [
     "rate",
@@ -16,14 +16,15 @@
     "ratelimit",
     "security",
     "express",
+    "vitrineed",
     "meuguru"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/meu-guru/shen-rate-limit/issues"
+    "url": "https://github.com/vitrineed/shen-rate-limit/issues"
   },
-  "homepage": "https://github.com/meu-guru/shen-rate-limit#readme",
+  "homepage": "https://github.com/vitrineed/shen-rate-limit#readme",
   "dependencies": {
     "defaults": "^1.0.0",
     "jsonfile": "^2.4.0"
